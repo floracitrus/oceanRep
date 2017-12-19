@@ -135,42 +135,84 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	
 	partialxM = []
 	for i in range(180):
+
+		#partialxM[i][359] = newM[i][0]-newM[i][359]
 		partialxM.append(np.diff(newM[i]))
+
+
+		#partialxM.append()
+	############partialxM.append(newM[0]-newM[179])
 	partialxM = np.array(partialxM)
+	
 	##########method 1
-	#partialM = np.c_[ partialxM, np.zeros(180) ]
+	#partialxM = np.c_[ partialxM, np.zeros(180) ]
 
 	#partialxM = np.divide(partialxM, dx[0,:,:])
 	##########method 2
-	b = np.zeros((180,360))
-	b[:,:-1] = partialxM
-	arrayxM = np.divide(b, dx[0,:,:])
+	#b = np.zeros((180,360))
+	#b[:,:-1] = partialxM
+	partialxM = np.divide(partialxM, dx[0,:,:])
+
 
 	partialyM = []
 	for i in range(360):
 		partialyM.append(np.diff(np.transpose(newM)[i]))
-
-
+	partialyM.append(np.transpose(newM)[0]-np.transpose(newM)[359])
 	partialyM = np.array(partialyM)
-	partialyM = np.c_[ partialyM, np.zeros(360) ]  
+	######################partialyM = np.c_[ partialyM, np.zeros(360) ]  
 	partialyM = np.divide(partialyM, np.transpose(dy[0,:,:]))
-
-
-
-	print("partial x Matrix with all non zero values")
-	row,col = np.nonzero(arrayxM)
-	print(arrayxM[row, col])
-	print("partial y Matrix")
-	print(partialyM)
-
-	# print("xtttttttttttt")
-	# print(dx[0,:,:])
-
-	# print("ytttttttttttt")
-	# print(dy[0,:,:])
+	#simplyfied times K
+	[list(map(lambda x: x*1000, array)) for array in arrayxM]
+	[list(map(lambda x: x*1000, array)) for array in partialyM]
 
 	
 
+
+	fluxyM = []
+	for i in range(360):
+		fluxyM.append(np.diff(partialyM[i]))
+	fluxyM.append(partialyM[0]-partialyM[359])
+	fluxyM = np.array(fluxyM)
+	
+	fluxxM = []
+	for i in range(180):
+		fluxxM.append(np.diff(arrayxM[i]))
+	fluxxM.append(partialxM[0]-partialxM[179])
+	fluxxM = np.array(fluxxM)	
+	
+	#b = np.zeros((180,360))
+	#b[:,:-1] = fluxxM
+	fluxxM = np.divide(dx[0,:,:])
+	
+	fluxyM = np.array(fluxyM)
+	#fluxyM = np.c_[fluxyM, np.zeros(360)]
+	fluxyM = np.divide(fluxyM, np.transpose(dy[0,:,:]))
+
+
+	plt.figure(1)
+	plt.contour(fluxxM)
+	plt.plot()
+	plt.figure(2)
+	plt.contour(fluxyM)
+	plt.plot()
+	plt.figure(3)
+	plt.title("flux_ydir_M")
+	plt.imshow(fluxyM, extent=[yt.min(), yt.max(), xt.min(), xt.max()], 
+                 interpolation='nearest', origin='lower')
+	plt.figure(4)
+	plt.title("flux_xdir_M")
+	plt.imshow(fluxxM, extent=[xt.min(), xt.max(), yt.min(), yt.max()], 
+                 interpolation='nearest', origin='lower')
+
+	plt.show()
+
+	print("partial x Matrix with all non zero values")
+	row,col = np.nonzero(fluxxM)
+	print(fluxxM[row, col])
+	print("partial y Matrix")
+	#rint(partialyM)
+
+	plt.show()
 
 
 

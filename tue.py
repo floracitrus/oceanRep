@@ -43,7 +43,7 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	RANA = 35.9
 	RANB = 36.1
 	littled = 5 #1/0.1
-	#MON = 0
+	MON = 0
 	#totz = 0
 	time = 365*24*3600/12
 	gridx, gridy = np.meshgrid(xt,yt)
@@ -51,10 +51,11 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	fluxzM = np.zeros((101,180,360))
 	fluxxM = np.zeros((101,180,360))
 	fluxyM = np.zeros((101,180,360))
-	vlist = []
+	vlisth = []
+	vlistv = []
 	for MON in range(12):
-	#vertical with fixed range of longtitude which is the part that circle allocated in 
-	#####################vertical
+		#vertical with fixed range of longtitude which is the part that circle allocated in 
+		#####################vertical
 		for k in range(360):
 		
 			saJanSurf = np.squeeze(sa[MON, :, :, k])
@@ -98,7 +99,7 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 			dif2z = np.array(dif2z)
 		
 		fluxzM = np.divide(fluxzM, dif2z)
-		print(fluxzM)
+		#print(fluxzM)
 		#################horizontal
 		for i in range(101):
 		
@@ -150,7 +151,7 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 			partialyM = np.divide(partialyM, np.transpose(dify))
 			
 
-			partialyM = np.c_[partialyM, np.transpose(partialyM)[0]]
+			partialyM = np.c_[np.transpose(partialyM)[11], partialyM]
 			fluxy2dM = []
 			for k in range(360):
 				fluxy2dM.append(np.diff(partialyM[k]))	
@@ -158,28 +159,67 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 			dif2y = dy
 			dif3y = np.roll(dif3y, 2, axis = 1)
 			dif2y = np.add(dif2y, dif3y)
-			dif2y = np.multiply(dif2x, 0.5)
+			dif2y = np.multiply(dif2y, 0.5)
 			dif2y = np.array(dif2y)
 
 
 			fluxyM[i,:,:] = np.transpose(fluxy2dM)
-
+		
+		fluxxM = np.divide(fluxxM,dif2x)
+		fluxyM = np.divide(fluxyM,dif2y)
 			
 		#print(fluxxM)
-		sdot = np.add(fluxyM,fluxxM)
-		sdot = np.add(sdot, fluxzM)
-		sdot = np.array(sdot)
+		sdoth = np.add(fluxyM,fluxxM)
+		sdotv = np.array(fluxzM)
+		sdoth = np.array(sdoth)
 
-		v = np.multiply(sdot, vol)
+		valv = 0
+		valh = 0
 		m = maskMatrix(np.squeeze(sa[MON, :, :, :]), 35.9, 36.1)
 		m = m & ((gridx<280) & (gridx>200))
-		vt = sum(v[m])
+		#print(vol[m])
+
+		for i in range(101):
+			for j in range(180):
+				for k in range(360):
+					if not np.isnan(sdoth[i][j][k]) and (35.9<sa[MON,i,j,k]<36.1) and np.nonzero(sdoth[i][j][k]):
+						valh += sdoth[i][j][k]*vol[i][j][k]
+					if not np.isnan(sdotv[i][j][k]) and (35.9<sa[MON,i,j,k]<36.1) and np.nonzero(sdotv[i][j][k]):
+						valv += sdotv[i][j][k]*vol[i][j][k]
 		
-		#print(vt)
-		vlist.append(vt)	
+		valh = valh*littled
+		valh = valh/1000000
 		
-	plt.figure(1)
-	plt.plot(vlist)
+		vlisth.append(valh)
+		valv = valv*littled
+		valv = valv/1000000
+		
+		vlistv.append(valv)
+	
+	plt.figure()
+	plt.plot(vlistv)
+	plt.plot(vlisth)
+	plt.legend(['vertical mixing sa dot', 'horizontal mixing sa dot'], loc='upper left')
+	plt.xlabel('Month')
+	plt.ylabel('changes of volume in svandrup by mixing')
+
+
+
+
+
+
+	# v = np.multiply(sdot, vol)
+	# m = maskMatrix(np.squeeze(sa[MON, :, :, :]), 35.9, 36.1)
+	# m = m & ((gridx<280) & (gridx>200))
+	# vt = sum(v[m])
+	
+	#print(vt)
+	#vlist.append(vt)	
+	# volList = [-652663.169149,-746266.288002,-711537.604518,-733834.16875,-915989.792616,-734469.03343,-764119.198171,-704553.574485,-794743.330259,-615978.965556,-805162.564102,-823308.161848]
+	# plt.figure(1)
+	# x = range(1,13)
+	# rects1 = plt.bar(x,volList)
+	# #plt.plot(vlist)
 
 	plt.show()
 

@@ -149,7 +149,7 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	plt.plot()
 
 
-	for i in [0,100]:#range zt
+	for i in [0,100]:#range zt#
 		sa2ds = np.squeeze(sa3d[i,:,:])
 		m = maskMatrix(sa2ds, rangeA, rangeB)
 		mask = m & ((gridy<(-20)) & (gridy>(-80)))
@@ -160,15 +160,6 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	plt.show()
 
 ###########################################################################
-
-
-
-
-
-
-
-
-
 
 
 

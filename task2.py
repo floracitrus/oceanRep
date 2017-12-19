@@ -16,7 +16,6 @@ def printStatus(matrix):
 def maskMatrix(matrix, rangeA, rangeB):
 	np.errstate(invalid='ignore')
 	m = (matrix>=rangeA) & (matrix<rangeB) 
-
 	#selected = matrix[m] #a list of selected points
 	return m
 #for bar chart
@@ -179,50 +178,50 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	plt.subplot(3,3,2)
 	plt.imshow(np.squeeze(sa[i,10,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
-	plt.title("depth 10 Layer")
+	plt.title("depth 50m Layer")
 	
 
 	plt.subplot(3,3,3)
 	plt.imshow(np.squeeze(sa[i,20,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
-	plt.title("depth 20 Layer")
+	plt.title("depth 100m Layer")
 	
 
 	plt.subplot(3,3,4)
 	plt.imshow(np.squeeze(sa[i,21,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
-	plt.title("depth 21 Layer")
+	plt.title("depth 125m Layer")
 	
 	plt.subplot(3,3,5)
 	plt.imshow(np.squeeze(sa[i,22,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
-	plt.title("depth 22 Layer")
+	plt.title("depth 150m Layer")
 	
 
 	plt.subplot(3,3,6)
 	plt.imshow(np.squeeze(sa[i,23,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
-	plt.title("depth 23 Layer")
+	plt.title("depth 175m Layer")
 	plt.colorbar()
 	#January depth60 xy layer
 
 	plt.subplot(3,3,7)
-	plt.imshow(np.squeeze(sa[i,25,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
+	plt.imshow(np.squeeze(sa[i,24,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
-	plt.title("depth 25 Layer")
+	plt.title("depth 200m Layer")
 	plt.colorbar()
 
 
 	plt.subplot(3,3,8)
-	plt.imshow(np.squeeze(sa[i,60,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
+	plt.imshow(np.squeeze(sa[i,25,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
-	plt.title("depth 60 Layer")
+	plt.title("depth 225 Layer")
 	
 	#January depth100 xy layer
 	plt.subplot(3,3,9)
-	plt.imshow(np.squeeze(sa[i,100,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
+	plt.imshow(np.squeeze(sa[i,56,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
-	plt.title("depth 100 Layer")
+	plt.title("depth 1000 Layer")
 	
 ###########################################################
 

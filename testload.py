@@ -6,20 +6,21 @@ from copy import copy, deepcopy
 #as from v7.3 matlab using h5py
 
 
-def effectionPlot(sa_bf,intrest_min, intrest_max):
-	#basic iteration
-	newsa =deepcopy(sa_bf)
-	for i in range(len(sa_bf)):
-		for j in range(len(sa_bf[i])):
-			if np.isnan(sa_bf[i][j]):
-				newsa[i][j] = 0
+# def effectionPlot(sa_bf,intrest_min, intrest_max):
+# 	#basic iteration
+# 	newsa =deepcopy(sa_bf)
+# 	for i in range(len(sa_bf)):
+# 		for j in range(len(sa_bf[i])):
+# 			if np.isnan(sa_bf[i][j]):
+# 				newsa[i][j] = 0
 
-			elif sa_bf[i][j]>intrest_min and sa_bf[i][j]<intrest_max:
-				newsa[i][j] = 1
-			else:
-				newsa[i][j] = 0
+# 			elif sa_bf[i][j]>intrest_min and sa_bf[i][j]<intrest_max:
+# 				newsa[i][j] = 1
+# 				lst.append()
+# 			else:
+# 				newsa[i][j] = 0
 	
-	return newsa
+# 	return newsa
 
 
 
@@ -91,8 +92,8 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	sa_bf = np.array(sa2dyz) #salinity before arraylize
 
 
-	intrest_min = 35
-	intrest_max = 36.5
+	intrest_min = 34
+	intrest_max = 36.3
 	#call function
 	#print(sa_bf.shape)
 	newsa = effectionPlot(sa_bf, intrest_min,intrest_max)
@@ -103,12 +104,43 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	#print(newsa.shape)
 	
 	plt.pcolor(yt, zt, newsa,cmap='RdBu',vmin=0, vmax=1)	
-	plt.title('if in region or not plot')
+	plt.title('if in region or not plot'+str(intrest_min)+'to'+str(intrest_max))
 	
 	#plt.title('The pcolor plot of dy dz and salinity')
 	plt.axis([yt.min(), yt.max(), zt.min(), zt.max()])
 	plt.colorbar()
 	plt.gca().invert_yaxis()
+
+
+
+
+
+	plt.subplot(2, 2, 2)
+	sa_bf = np.array(sa2dyz) #salinity before arraylize
+
+
+	intrest_min = 35.1
+	intrest_max = 36.5
+	#call function
+	#print(sa_bf.shape)
+	newsa = effectionPlot(sa_bf, intrest_min,intrest_max)
+
+	plt.pcolor(yt, zt, newsa,cmap='RdBu',vmin=0, vmax=1)	
+	plt.title('if in region or not plot'+str(intrest_min)+'to'+str(intrest_max))
+
+	plt.axis([yt.min(), yt.max(), zt.min(), zt.max()])
+	plt.colorbar()
+	plt.gca().invert_yaxis()
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -129,5 +161,5 @@ def checkEqual1(iterator):
 		first = next(iterator)
 	except StopIteration:
 		return True
-	return all(first == rest for rest in iterator
+	return all(first == rest for rest in iterator)
 
