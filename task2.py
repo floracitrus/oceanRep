@@ -166,14 +166,22 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	# 	c = plt.contour(xt,yt,np.squeeze(sa[i,0,:,:]),100,colors='k')
 	# 	plt.clabel(c, inline=1, fontsize=10)
 ##################################
+<<<<<<< HEAD
+	i = 2
+=======
 	i = 0
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 	plt.figure(5)
 	plt.subplot(3,3,1)
 	#January surface xy layer
 	plt.imshow(np.squeeze(sa[i,0,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
 	plt.title("surface Layer January")
+<<<<<<< HEAD
+	#plt.colorbar()
+=======
 	plt.colorbar()
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 	
 	plt.subplot(3,3,2)
 	plt.imshow(np.squeeze(sa[i,10,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
@@ -185,7 +193,11 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	plt.imshow(np.squeeze(sa[i,20,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
 	plt.title("depth 100m Layer")
+<<<<<<< HEAD
+	plt.colorbar()
+=======
 	
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 
 	plt.subplot(3,3,4)
 	plt.imshow(np.squeeze(sa[i,21,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
@@ -209,7 +221,11 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	plt.imshow(np.squeeze(sa[i,24,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
 	plt.title("depth 200m Layer")
+<<<<<<< HEAD
+	#plt.colorbar()
+=======
 	plt.colorbar()
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 
 
 	plt.subplot(3,3,8)
@@ -222,6 +238,10 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	plt.imshow(np.squeeze(sa[i,56,:,:]),extent=[xt.min(), xt.max(), yt.min(), yt.max()],
 		 interpolation='nearest', origin='lower',cmap=plt.cm.coolwarm,vmin = 35.9, vmax = 36.3)
 	plt.title("depth 1000 Layer")
+<<<<<<< HEAD
+	plt.colorbar()
+=======
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 	
 ###########################################################
 

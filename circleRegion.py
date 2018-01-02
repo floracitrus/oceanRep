@@ -44,6 +44,20 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	RANGEB = 39
 
 
+<<<<<<< HEAD
+	plt.figure(6)
+	v5=[]
+	for i in range(12):
+		m = maskMatrix(np.squeeze(sa[i, :, :, :]), RANGEA, RANGEB)
+		b = m & ((gridx<280) & (gridx>160))
+		c = b & (gridy<(5))
+		c =	c & (gridy>(-60))
+		a = vol[c]
+		plt.subplot(3,4,i+1)
+		plt.imshow(c[0], extent=[xt.min(), xt.max(), yt.min(), yt.max()], interpolation='nearest', origin='lower')
+		v5.append(sum(a))
+	v5.insert(0,v5[11])
+=======
 	plt.figure()
 	v5=[]
 	for i in range(12):
@@ -55,11 +69,114 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 		plt.imshow(m[0], extent=[xt.min(), xt.max(), yt.min(), yt.max()], interpolation='nearest', origin='lower')
 		v5.append(sum(a))	
 	v5.append(v5[0])
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 	v5 = np.array(v5)
 	d5 = np.diff(v5)
 	svconvert = time*1000000
 	d5 = [i/svconvert for i in d5]
+<<<<<<< HEAD
+	plt.figure(5)
+	plt.plot(v5)
+	plt.figure(4)
 	plt.plot(d5)
+	# plt.figure(1)
+	# plt.title('Jul')
+	# i = 6
+	# m = maskMatrix(np.squeeze(sa[i, :, :, :]), RANGEA, RANGEB)
+	# b = m & ((gridx<280) & (gridx>160))
+	# c = b & (gridy<5)
+	# c =	c & (gridy>(-60))
+	# a = vol[c]
+	# depth = 1
+	# for depth in range(1,31):
+	# 	plt.subplot(5,6,depth)
+	# 	plt.imshow(c[depth], extent=[xt.min(), xt.max(), yt.min(), yt.max()], interpolation='nearest', origin='lower')
+	# plt.plot()
+	# plt.figure(2)
+	# plt.title('Aug')
+	# i = 7
+	# m = maskMatrix(np.squeeze(sa[i, :, :, :]), RANGEA, RANGEB)
+	# b = m & ((gridx<280) & (gridx>160))
+	# c = b & (gridy<5)
+	# c =	c & (gridy>(-60))
+	# e = vol[c]
+	# depth = 1
+	# for depth in range(1,31):
+	# 	plt.subplot(5,6,depth)
+	# 	plt.imshow(c[depth], extent=[xt.min(), xt.max(), yt.min(), yt.max()], interpolation='nearest', origin='lower')
+	# plt.plot()
+
+	# #plt.figure(3)
+	# print(sum(a))
+	# print(sum(e))
+
+	# plt.figure(3)
+	# plt.title('Jan')
+	# i = 0
+	# m = maskMatrix(np.squeeze(sa[i, :, :, :]), RANGEA, RANGEB)
+	# b = m & ((gridx<280) & (gridx>160))
+	# c = b & (gridy<5)
+	# c =	c & (gridy>(-60))
+	# a = vol[c]
+	# depth = 1
+	# for depth in range(1,31):
+	# 	plt.subplot(5,6,depth)
+	# 	plt.imshow(c[depth], extent=[xt.min(), xt.max(), yt.min(), yt.max()], interpolation='nearest', origin='lower')
+	# print(sum(a))
+	# plt.plot()
+	
+	# plt.figure(6)
+	# plt.title('Nov')
+	# i = 10
+	# m = maskMatrix(np.squeeze(sa[i, :, :, :]), RANGEA, RANGEB)
+	# b = m & ((gridx<280) & (gridx>160))
+	# c = b & (gridy<5)
+	# c =	c & (gridy>(-60))
+	# a = vol[c]
+	# depth = 1
+	# for depth in range(1,31):
+	# 	plt.subplot(5,6,depth)
+	# 	plt.imshow(c[depth], extent=[xt.min(), xt.max(), yt.min(), yt.max()], interpolation='nearest', origin='lower')
+	# print(sum(a))
+	# plt.plot()
+	
+
+
+	# plt.figure(7)
+	# plt.title('Dec')
+	# i = 11
+	# m = maskMatrix(np.squeeze(sa[i, :, :, :]), RANGEA, RANGEB)
+	# b = m & ((gridx<280) & (gridx>160))
+	# c = b & (gridy<5)
+	# c =	c & (gridy>(-60))
+	# a = vol[c]
+	# depth = 1
+	# for depth in range(1,31):
+	# 	plt.subplot(5,6,depth)
+	# 	plt.imshow(c[depth], extent=[xt.min(), xt.max(), yt.min(), yt.max()], interpolation='nearest', origin='lower')
+	# print(sum(a))
+	# plt.plot()
+	
+
+	# plt.figure(8)
+	# plt.title('Sep')
+	# i = 8
+	# m = maskMatrix(np.squeeze(sa[i, :, :, :]), RANGEA, RANGEB)
+	# b = m & ((gridx<280) & (gridx>160))
+	# c = b & (gridy<5)
+	# c =	c & (gridy>(-60))
+	# a = vol[c]
+	# depth = 1
+	# for depth in range(1,31):
+	# 	plt.subplot(5,6,depth)
+	# 	plt.imshow(c[depth], extent=[xt.min(), xt.max(), yt.min(), yt.max()], interpolation='nearest', origin='lower')
+	# print(sum(a))
+	# plt.plot()
+	
+
+=======
+	plt.plot(d5)
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 	plt.show()
 
 ##################line volume change dv/dt

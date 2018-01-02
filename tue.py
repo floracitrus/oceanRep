@@ -63,9 +63,16 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 			newM[ newM > RANB ] = RANB
 			newM[ newM < RANA ] = RANA
 
+<<<<<<< HEAD
+			#有问题吧不应是11列
+			#
+			#add the last col to first for calculate the first one
+			newzM = np.c_[np.transpose(newM)[359], newM]
+=======
 
 			#add the last col to first for calculate the first one
 			newzM = np.c_[np.transpose(newM)[11], newM]
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 			partialzM = []
 			
 			#(x1+x2)/2
@@ -177,6 +184,23 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 		valh = 0
 		m = maskMatrix(np.squeeze(sa[MON, :, :, :]), 35.9, 36.1)
 		m = m & ((gridx<280) & (gridx>200))
+<<<<<<< HEAD
+		b = m & ((gridx<280) & (gridx>200))
+		c = b & (gridy<(-5))
+		#print(vol[m])
+		t = np.multiply(sdoth,vol)
+		valh = sum(t[c])
+		t1 = np.multiply(sdotv,vol)
+		valv = sum(t1[c])
+
+		# for i in range(101):
+		# 	for j in range(180):
+		# 		for k in range(360):
+		# 			if not np.isnan(sdoth[i][j][k]) and (35.9<sa[MON,i,j,k]<36.1) and np.nonzero(sdoth[i][j][k]):
+		# 				valh += sdoth[i][j][k]*vol[i][j][k]
+		# 			if not np.isnan(sdotv[i][j][k]) and (35.9<sa[MON,i,j,k]<36.1) and np.nonzero(sdotv[i][j][k]):
+		# 				valv += sdotv[i][j][k]*vol[i][j][k]
+=======
 		#print(vol[m])
 
 		for i in range(101):
@@ -186,6 +210,7 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 						valh += sdoth[i][j][k]*vol[i][j][k]
 					if not np.isnan(sdotv[i][j][k]) and (35.9<sa[MON,i,j,k]<36.1) and np.nonzero(sdotv[i][j][k]):
 						valv += sdotv[i][j][k]*vol[i][j][k]
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 		
 		valh = valh*littled
 		valh = valh/1000000
@@ -193,7 +218,11 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 		vlisth.append(valh)
 		valv = valv*littled
 		valv = valv/1000000
+<<<<<<< HEAD
+		print(valv, valh)
+=======
 		
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 		vlistv.append(valv)
 	
 	plt.figure()
@@ -202,7 +231,11 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	plt.legend(['vertical mixing sa dot', 'horizontal mixing sa dot'], loc='upper left')
 	plt.xlabel('Month')
 	plt.ylabel('changes of volume in svandrup by mixing')
+<<<<<<< HEAD
+	plt.show()
+=======
 
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 
 
 
@@ -221,7 +254,11 @@ with h5py.File('WOA_gsw_JMcD95_plus.mat', 'r') as file:
 	# rects1 = plt.bar(x,volList)
 	# #plt.plot(vlist)
 
+<<<<<<< HEAD
+	# plt.show()
+=======
 	plt.show()
+>>>>>>> 79be1bc5a1105c7ba61d549a7c51bfb6e71ea3a9
 
 
 
